@@ -1,5 +1,6 @@
 import React from "react";
-import ProductsCart from "./ProductsCart";
+import { Suspense } from "react";
+const ProductsCart= React.lazy(()=>import("./ProductsCart"));
 
 const Products = ({ products }) => {
   return (
@@ -19,7 +20,10 @@ const Products = ({ products }) => {
       {/* =================== Products Start here ================= */}
       <div className="max-w-screen-xl mx-auto grid grid-cols-4 gap-10 py-10">
         {products.map((item) => (
-          <ProductsCart key={item._id} product={item} />
+          <Suspense fallback={<p>This is loading</p>}>
+
+            <ProductsCart key={item._id} product={item} />
+          </Suspense>
         ))}
       </div>
       {/* =================== Products End here =================== */}

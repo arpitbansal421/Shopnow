@@ -2,6 +2,7 @@ import React from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { Profiler } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../redux/store";
 import {
@@ -17,11 +18,19 @@ const CartItem = () => {
   console.log(store.shop)
   const productData = useSelector((store) => store?.shop.productData);
   console.log("Hi I am from cartitems array",productData)
+
+  const logTimes=(id,phase,actualTime, baseTime, startTime, commitTime)=>{
+    console.table({id,phase,actualTime,baseTime,startTime,commitTime})
+
+
+  }
+
   return (
-    <div className="w-2/3 pr-10">
+    <Profiler id='item-info' onRender={logTimes}>
+        <div className="w-2/3 pr-10">
       <div className="w-full">
         <h2 className="font-titleFont text-2xl">shopping cart</h2>
-        <div>
+        <div>                                                                                                       
           <div>
             {productData.map((item) => (
               <div
@@ -119,6 +128,10 @@ const CartItem = () => {
         theme="dark"
       />
     </div>
+
+
+    </Profiler>
+  
   );
 };
 

@@ -2,16 +2,26 @@ import React from "react";
 import { cart, logoDark } from "./assests/index"; // Make sure the path is correct
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Profiler } from "react";
 const Header = () => { // Component name should start with uppercase
  
   const productdata=useSelector((store)=>store.shop.productData)
   const userInfo=useSelector((store)=>store.shop.userInfo)
+
+  
   console.log(userInfo)
 
   console.log("Hi I am from productsdata",productdata)
+
+  const logTimes=(id,phase,actualTime, baseTime, startTime, commitTime)=>{
+    console.table("Hi this react profiler",{id,phase,actualTime,baseTime,startTime,commitTime})
+
+
+  }
   
   return (
-    <div className="w-full h-20 bg-white font-titleFont border-b-[1px] border-b-gray-800 sticky top-0 z-50">
+    <Profiler id='item-info' onRender={logTimes}>
+      <div className="w-full h-20 bg-white font-titleFont border-b-[1px] border-b-gray-800 sticky top-0 z-50">
       <div className="max-w-screen-xl h-full mx-auto flex items-center justify-between">
         <div>
         <Link to ='/'><h1 className="w-15 font-bold text-3xl text-black font-cursive">
@@ -56,6 +66,10 @@ const Header = () => { // Component name should start with uppercase
         </div>
       </div>
     </div>
+
+
+    </Profiler>
+    
   );
 };
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Banner from '../banner';
-import Products from '../Products';
+import React, { useEffect, useState,Suspense } from 'react';
 import { useLoaderData } from 'react-router-dom';
+const Banner= React.lazy(()=>import('../banner'));
+const Products =React.lazy( ()=>import('../Products'));
 
 function Home() {
   const [products, setProducts] = useState([]); // Initialize products state with an empty array
@@ -16,8 +16,14 @@ function Home() {
 
   return (
     <div>
-      <Banner />
+      <Suspense fallback={<p>Loading</p>}> 
+         <Banner />
+      </Suspense>
+      <Suspense fallback={<p>Loading</p>}>
+
       <Products products={products} /> {/* Pass products as props to Products component */}
+      </Suspense>
+
     </div>
   );
 }
