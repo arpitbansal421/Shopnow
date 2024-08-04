@@ -8,5 +8,9 @@ module.exports = {
       cursive: ['cursive', 'sans-serif']},
  
   plugins: []},
+  screens: {
+    'max-xs': {'max':'375px'}, // Custom breakpoint for extra small screens
+  },
+
 }}
 
